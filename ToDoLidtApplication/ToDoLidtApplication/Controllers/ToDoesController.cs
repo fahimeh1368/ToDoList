@@ -22,6 +22,12 @@ namespace ToDoLidtApplication.Controllers
             ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
             return View(db.ToDos.ToList().Where(a=> a.User == currentUser));
         }
+        public ActionResult BuildToDoTable()
+        {
+            string currentUserId = User.Identity.GetUserId();
+            ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
+            return PartialView("_ToDoTable",db.ToDos.ToList().Where(a => a.User == currentUser));
+        }
 
         // GET: ToDoes/Details/5
         public ActionResult Details(int? id)
